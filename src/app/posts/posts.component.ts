@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+import { DataService } from './../data.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostsComponent implements OnInit {
 
-  constructor() { }
+  posts$: Object;
+
+  constructor(private data: DataService) { }
 
   ngOnInit() {
+    this.data.getPosts().subscribe(
+      data => this.posts$ = data
+    );
   }
 
 }
